@@ -73,3 +73,4 @@ Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\elasticsearch\connection\http_urllib3.py", line 266, in perform_request
     raise ConnectionError("N/A", str(e), e)
 elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x00000224A25FCBE0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x00000224A25FCBE0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。)
+2021-08-05 15:39:09,088 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:77]
