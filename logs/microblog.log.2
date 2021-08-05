@@ -1,57 +1,4 @@
-2021-08-05 14:38:44,634 ERROR: Exception on /explore [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
-Traceback (most recent call last):
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
-    self.dialect.do_execute(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such column: post.language
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
-    response = self.full_dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "D:\Term\python_learn\microblog\app\main\routes.py", line 47, in explore
-    posts = Post.query.order_by(Post.timestamp.desc()).paginate(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_sqlalchemy\__init__.py", line 534, in paginate
-    items = self.limit(per_page).offset((page - 1) * per_page).all()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2712, in all
-    return self._iter().all()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
-    result = self.session.execute(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1689, in execute
-    result = conn._execute_20(statement, params or {}, execution_options)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1452, in _execute_clauseelement
-    ret = self._execute_context(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1814, in _execute_context
-    self._handle_dbapi_exception(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1995, in _handle_dbapi_exception
-    util.raise_(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\util\compat.py", line 207, in raise_
-    raise exception
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
-    self.dialect.do_execute(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.language
-[SQL: SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
-FROM post ORDER BY post.timestamp DESC
- LIMIT ? OFFSET ?]
-[parameters: (20, 0)]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
-2021-08-05 14:38:45,975 ERROR: Exception on /index [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+2021-08-05 14:40:50,008 ERROR: Exception on / [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
 Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
     self.dialect.do_execute(
@@ -106,5 +53,72 @@ WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS po
 FROM post 
 WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
  LIMIT ? OFFSET ?]
-[parameters: (3, 3, 20, 0)]
+[parameters: (3, 3, 25, 0)]
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-08-05 14:41:54,012 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
+2021-08-05 14:42:19,954 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
+2021-08-05 14:42:24,923 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
+2021-08-05 14:42:54,591 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
+2021-08-05 15:06:36,720 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:78]
+2021-08-05 15:06:54,159 ERROR: Exception on /search [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 148, in search
+    posts, total = Post.search(g.search_form.q.data, page,
+AttributeError: type object 'Post' has no attribute 'search'
+2021-08-05 15:07:34,519 ERROR: Exception on /search [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 148, in search
+    posts, total = Post.search(g.search_form.q.data, page,
+AttributeError: type object 'Post' has no attribute 'search'
+2021-08-05 15:07:51,032 ERROR: Exception on /search [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 148, in search
+    posts, total = Post.search(g.search_form.q.data, page,
+AttributeError: type object 'Post' has no attribute 'search'
+2021-08-05 15:19:55,185 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:77]
+2021-08-05 15:20:05,393 ERROR: Exception on /search [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 148, in search
+    posts, total = Post.search(g.search_form.q.data, page,
+AttributeError: type object 'Post' has no attribute 'search'
+2021-08-05 15:24:50,122 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:77]

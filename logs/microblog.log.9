@@ -1,4 +1,13 @@
-2021-08-05 10:53:05,384 ERROR: Exception on /login [POST] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+2021-08-05 14:35:33,973 ERROR: Exception on /index [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.language
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
     response = self.full_dispatch_request()
@@ -8,17 +17,54 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 45, in login
-    return redirect(url_for(next_page))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\werkzeug\routing.py", line 2305, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint '/index'. Did you mean 'index' instead?
-2021-08-05 11:06:21,083 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:44]
-2021-08-05 11:06:30,705 ERROR: Exception on /login [POST] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 32, in index
+    posts = current_user.followed_posts().paginate(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_sqlalchemy\__init__.py", line 534, in paginate
+    items = self.limit(per_page).offset((page - 1) * per_page).all()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2712, in all
+    return self._iter().all()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result = self.session.execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1452, in _execute_clauseelement
+    ret = self._execute_context(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1814, in _execute_context
+    self._handle_dbapi_exception(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1995, in _handle_dbapi_exception
+    util.raise_(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\util\compat.py", line 207, in raise_
+    raise exception
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.language
+[SQL: SELECT anon_1.post_id AS anon_1_post_id, anon_1.post_body AS anon_1_post_body, anon_1.post_timestamp AS anon_1_post_timestamp, anon_1.post_user_id AS anon_1_post_user_id, anon_1.post_language AS anon_1_post_language 
+FROM (SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
+FROM post JOIN followers ON followers.followed_id = post.user_id 
+WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
+FROM post 
+WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
+ LIMIT ? OFFSET ?]
+[parameters: (1, 1, 20, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-08-05 14:35:40,730 ERROR: Exception on /index [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.language
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
     response = self.full_dispatch_request()
@@ -28,75 +74,41 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 50, in login
-    return redirect(url_for(next_page))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\werkzeug\routing.py", line 2305, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint '/'. Did you mean 'edit_profile' instead?
-2021-08-05 11:23:51,713 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:46]
-2021-08-05 12:26:05,809 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:48]
-2021-08-05 12:26:26,063 ERROR: Exception on /login [POST] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
-Traceback (most recent call last):
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
-    response = self.full_dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 53, in login
-    return redirect(url_for(next_page))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\werkzeug\routing.py", line 2305, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint '/explore'. Did you mean 'explore' instead?
-2021-08-05 12:44:23,918 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:50]
-2021-08-05 12:44:31,925 ERROR: Exception on /login [POST] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
-Traceback (most recent call last):
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
-    response = self.full_dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 53, in login
-    return redirect(url_for(next_page))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\werkzeug\routing.py", line 2305, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint '/'. Did you mean 'reset_password_request' instead?
-2021-08-05 13:12:53,149 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:59]
-2021-08-05 13:13:21,975 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:59]
-2021-08-05 13:13:30,536 ERROR: Exception on /login [POST] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
-Traceback (most recent call last):
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
-    response = self.full_dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 55, in login
-    return redirect(url_for(next_page))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\werkzeug\routing.py", line 2305, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint '/'. Did you mean 'reset_password_request' instead?
-2021-08-05 14:27:17,502 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 32, in index
+    posts = current_user.followed_posts().paginate(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_sqlalchemy\__init__.py", line 534, in paginate
+    items = self.limit(per_page).offset((page - 1) * per_page).all()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2712, in all
+    return self._iter().all()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result = self.session.execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1452, in _execute_clauseelement
+    ret = self._execute_context(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1814, in _execute_context
+    self._handle_dbapi_exception(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1995, in _handle_dbapi_exception
+    util.raise_(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\util\compat.py", line 207, in raise_
+    raise exception
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.language
+[SQL: SELECT anon_1.post_id AS anon_1_post_id, anon_1.post_body AS anon_1_post_body, anon_1.post_timestamp AS anon_1_post_timestamp, anon_1.post_user_id AS anon_1_post_user_id, anon_1.post_language AS anon_1_post_language 
+FROM (SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
+FROM post JOIN followers ON followers.followed_id = post.user_id 
+WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
+FROM post 
+WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
+ LIMIT ? OFFSET ?]
+[parameters: (1, 1, 20, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)

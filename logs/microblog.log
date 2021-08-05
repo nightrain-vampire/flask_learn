@@ -1,12 +1,47 @@
-2021-08-05 14:40:50,008 ERROR: Exception on / [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+2021-08-05 15:34:12,355 ERROR: Exception on /search [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
 Traceback (most recent call last):
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
-    self.dialect.do_execute(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such column: post.language
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\util\connection.py", line 96, in create_connection
+    raise err
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\util\connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
 
-The above exception was the direct cause of the following exception:
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\elasticsearch\connection\http_urllib3.py", line 251, in perform_request
+    response = self.pool.urlopen(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\util\retry.py", line 507, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "C:\Users\14023\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\14023\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\14023\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\14023\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 1008, in _send_output
+    self.send(msg)
+  File "C:\Users\14023\AppData\Local\Programs\Python\Python39\lib\http\client.py", line 948, in send
+    self.connect()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\urllib3\connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000224A25FCBE0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
@@ -19,43 +54,22 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "D:\Term\python_learn\microblog\app\main\routes.py", line 32, in index
-    posts = current_user.followed_posts().paginate(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_sqlalchemy\__init__.py", line 534, in paginate
-    items = self.limit(per_page).offset((page - 1) * per_page).all()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2712, in all
-    return self._iter().all()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
-    result = self.session.execute(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1689, in execute
-    result = conn._execute_20(statement, params or {}, execution_options)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1452, in _execute_clauseelement
-    ret = self._execute_context(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1814, in _execute_context
-    self._handle_dbapi_exception(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1995, in _handle_dbapi_exception
-    util.raise_(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\util\compat.py", line 207, in raise_
-    raise exception
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
-    self.dialect.do_execute(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.language
-[SQL: SELECT anon_1.post_id AS anon_1_post_id, anon_1.post_body AS anon_1_post_body, anon_1.post_timestamp AS anon_1_post_timestamp, anon_1.post_user_id AS anon_1_post_user_id, anon_1.post_language AS anon_1_post_language 
-FROM (SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
-FROM post JOIN followers ON followers.followed_id = post.user_id 
-WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
-FROM post 
-WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
- LIMIT ? OFFSET ?]
-[parameters: (3, 3, 25, 0)]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
-2021-08-05 14:41:54,012 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
-2021-08-05 14:42:19,954 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
-2021-08-05 14:42:24,923 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
-2021-08-05 14:42:54,591 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 148, in search
+    posts, total = Post.search(g.search_form.q.data, page,
+  File "D:\Term\python_learn\microblog\app\models.py", line 15, in search
+    ids, total = query_index(cls.__tablename__, expression, page, per_page)
+  File "D:\Term\python_learn\microblog\app\search.py", line 22, in query_index
+    search = current_app.elasticsearch.search(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\elasticsearch\client\utils.py", line 168, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\elasticsearch\client\__init__.py", line 1668, in search
+    return self.transport.perform_request(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\elasticsearch\transport.py", line 409, in perform_request
+    self._do_verify_elasticsearch(headers=headers, timeout=timeout)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\elasticsearch\transport.py", line 598, in _do_verify_elasticsearch
+    raise error
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\elasticsearch\transport.py", line 561, in _do_verify_elasticsearch
+    _, info_headers, info_response = conn.perform_request(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\elasticsearch\connection\http_urllib3.py", line 266, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x00000224A25FCBE0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x00000224A25FCBE0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。)

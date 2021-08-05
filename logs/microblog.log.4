@@ -1,4 +1,4 @@
-2021-08-05 14:37:15,199 ERROR: Exception on / [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+2021-08-05 14:38:44,634 ERROR: Exception on /explore [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
 Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
     self.dialect.do_execute(
@@ -19,8 +19,8 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "D:\Term\python_learn\microblog\app\main\routes.py", line 32, in index
-    posts = current_user.followed_posts().paginate(
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 47, in explore
+    posts = Post.query.order_by(Post.timestamp.desc()).paginate(
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_sqlalchemy\__init__.py", line 534, in paginate
     items = self.limit(per_page).offset((page - 1) * per_page).all()
   File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2712, in all
@@ -46,16 +46,12 @@ Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
     cursor.execute(statement, parameters)
 sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.language
-[SQL: SELECT anon_1.post_id AS anon_1_post_id, anon_1.post_body AS anon_1_post_body, anon_1.post_timestamp AS anon_1_post_timestamp, anon_1.post_user_id AS anon_1_post_user_id, anon_1.post_language AS anon_1_post_language 
-FROM (SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
-FROM post JOIN followers ON followers.followed_id = post.user_id 
-WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
-FROM post 
-WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
+[SQL: SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
+FROM post ORDER BY post.timestamp DESC
  LIMIT ? OFFSET ?]
-[parameters: (1, 1, 20, 0)]
+[parameters: (20, 0)]
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
-2021-08-05 14:37:23,629 ERROR: Exception on /index [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+2021-08-05 14:38:45,975 ERROR: Exception on /index [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
 Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
     self.dialect.do_execute(
@@ -110,5 +106,5 @@ WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS po
 FROM post 
 WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
  LIMIT ? OFFSET ?]
-[parameters: (1, 1, 20, 0)]
+[parameters: (3, 3, 20, 0)]
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
