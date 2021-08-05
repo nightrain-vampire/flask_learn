@@ -1,28 +1,13 @@
-2021-08-05 10:03:16,977 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:44]
-2021-08-05 10:18:30,633 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:44]
-2021-08-05 10:18:45,446 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:44]
-2021-08-05 10:24:10,699 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:44]
-2021-08-05 10:28:51,906 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:44]
-2021-08-05 10:29:01,171 ERROR: Exception on /login [POST] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+2021-08-05 14:38:50,339 ERROR: Exception on /index [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
 Traceback (most recent call last):
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
-    response = self.full_dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 46, in login
-    return redirect(url_for(next_page))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\werkzeug\routing.py", line 2305, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint '/'. Did you mean 'edit_profile' instead?
-2021-08-05 10:29:15,781 ERROR: Exception on /user/night [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.language
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
     response = self.full_dispatch_request()
@@ -34,26 +19,52 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 76, in user
-    return render_template('user.html', user=user, posts=posts)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\templating.py", line 148, in render_template
-    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 997, in get_template
-    return self._load_template(name, globals)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 958, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\loaders.py", line 137, in load
-    code = environment.compile(source, name, filename)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 757, in compile
-    self.handle_exception(source=source_hint)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 925, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "D:\Term\python_learn\microblog\app\templates\user.html", line 18, in template
-    {% endif %}
-jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
-2021-08-05 10:29:22,021 ERROR: Exception on /user/night [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 32, in index
+    posts = current_user.followed_posts().paginate(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_sqlalchemy\__init__.py", line 534, in paginate
+    items = self.limit(per_page).offset((page - 1) * per_page).all()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2712, in all
+    return self._iter().all()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result = self.session.execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1452, in _execute_clauseelement
+    ret = self._execute_context(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1814, in _execute_context
+    self._handle_dbapi_exception(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1995, in _handle_dbapi_exception
+    util.raise_(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\util\compat.py", line 207, in raise_
+    raise exception
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.language
+[SQL: SELECT anon_1.post_id AS anon_1_post_id, anon_1.post_body AS anon_1_post_body, anon_1.post_timestamp AS anon_1_post_timestamp, anon_1.post_user_id AS anon_1_post_user_id, anon_1.post_language AS anon_1_post_language 
+FROM (SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
+FROM post JOIN followers ON followers.followed_id = post.user_id 
+WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
+FROM post 
+WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
+ LIMIT ? OFFSET ?]
+[parameters: (3, 3, 20, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-08-05 14:38:59,266 ERROR: Exception on /user/xzy [GET] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.language
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
     response = self.full_dispatch_request()
@@ -65,42 +76,37 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
   File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 76, in user
-    return render_template('user.html', user=user, posts=posts)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\templating.py", line 148, in render_template
-    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 1068, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 997, in get_template
-    return self._load_template(name, globals)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 958, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\loaders.py", line 137, in load
-    code = environment.compile(source, name, filename)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 757, in compile
-    self.handle_exception(source=source_hint)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\jinja2\environment.py", line 925, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "D:\Term\python_learn\microblog\app\templates\user.html", line 18, in template
-    {% endif %}
-jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
-2021-08-05 10:52:08,240 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:44]
-2021-08-05 10:52:16,766 ERROR: Exception on /login [POST] [in d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py:1454]
-Traceback (most recent call last):
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
-    response = self.full_dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "D:\Term\python_learn\microblog\app\routes.py", line 45, in login
-    return redirect(url_for(next_page))
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "d:\term\python_learn\microblog\venv\lib\site-packages\werkzeug\routing.py", line 2305, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint '/'. Did you mean 'edit_profile' instead?
+  File "D:\Term\python_learn\microblog\app\main\routes.py", line 63, in user
+    posts = user.posts.order_by(Post.timestamp.desc()).paginate(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\flask_sqlalchemy\__init__.py", line 534, in paginate
+    items = self.limit(per_page).offset((page - 1) * per_page).all()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2712, in all
+    return self._iter().all()
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result = self.session.execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1452, in _execute_clauseelement
+    ret = self._execute_context(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1814, in _execute_context
+    self._handle_dbapi_exception(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1995, in _handle_dbapi_exception
+    util.raise_(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\util\compat.py", line 207, in raise_
+    raise exception
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1771, in _execute_context
+    self.dialect.do_execute(
+  File "d:\term\python_learn\microblog\venv\lib\site-packages\sqlalchemy\engine\default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.language
+[SQL: SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id, post.language AS post_language 
+FROM post 
+WHERE ? = post.user_id ORDER BY post.timestamp DESC
+ LIMIT ? OFFSET ?]
+[parameters: (3, 20, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2021-08-05 14:40:36,308 INFO: Microblog startup [in D:\Term\python_learn\microblog\app\__init__.py:74]
